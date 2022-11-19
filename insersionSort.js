@@ -1,3 +1,4 @@
+// Time: O(n^2)
 const insersionSort = arr => {
     for (let i = 1; i < arr.length; i++) {
         let key = arr[i]

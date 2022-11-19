@@ -30,6 +30,7 @@ const merge = (arr, start, midPoint, end) => {
   }
 }
 
+// Time: O(n * log n)
 const mergeSort = (arr, start, end) => {
   if(end <= start) return 
   
