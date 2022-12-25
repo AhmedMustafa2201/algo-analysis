@@ -22,6 +22,16 @@ const generateCodes = (node, str) => {
     generateCodes(node.right, str + "1")
 }
 
+const specialSorting = (a, b) => {
+    const res = a.freq - b.freq
+    if(res !== 0) return res
+
+    if(a.data === "0" && b.data === "0") return res
+    if(a.data === "0" || b.data === "0") return a.data.charCodeAt(0) - b.data.charCodeAt(0)
+
+    return res
+}
+
 const huffmanCoding = (message) => {
     const hashMap = {}
     for (let i = 0; i < message.length; i++) {
@@ -38,10 +48,10 @@ const huffmanCoding = (message) => {
         priorityQueue.push(new Node(data, hashMap[data]))
     }
 
+    // priorityQueue.sort((a, b) => a.freq - b.freq)
     let top, left, right, newFreq;
-    while (priorityQueue.length != 1) {
-        priorityQueue
-            .sort((a, b) => a.freq - b.freq)
+    while (priorityQueue.length > 1) {
+        priorityQueue.sort(specialSorting)
 
         left = priorityQueue.shift()
         right = priorityQueue.shift()
@@ -52,7 +62,7 @@ const huffmanCoding = (message) => {
         top.left = left
         top.right = right
 
-        priorityQueue.push(top)
+        priorityQueue.unshift(top)
     }
 
 
@@ -62,6 +72,6 @@ const huffmanCoding = (message) => {
         .map(el => console.log(`${el[0]}: ${el[1]}`))
 }
 
-let msg = "internet"
+let msg = "internetinternet"
 
 huffmanCoding(msg)
