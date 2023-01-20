@@ -1,3 +1,4 @@
+// time: O(n logn), space: O(n)
 const fractionalKnapsak = (weight, profits, maxCapacity) => {
     const weightLen = weight.length
     
@@ -5,15 +6,14 @@ const fractionalKnapsak = (weight, profits, maxCapacity) => {
     for (let i = 0; i < weightLen; i++)
         formattedItems.push(new Item(`#${i}`, profits[i], weight[i]))
     
-    // let's act this sort as a merge sort
+    // let's act this "sort" as a merge sort
     formattedItems.sort((a, b) => b.ratio - a.ratio)
 
     let knapsak = new Knapsak(maxCapacity)
 
     let count = 0
-    while (knapsak.currentCapacity < knapsak.maxCapacity) {
+    while (knapsak.currentCapacity < knapsak.maxCapacity) 
         knapsak.addItem(formattedItems[count++])
-    }
 
     return knapsak.items
 }
